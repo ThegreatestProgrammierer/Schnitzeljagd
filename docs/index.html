@@ -41,6 +41,11 @@
         button:hover {
             background-color: #004d40; /* Etwas dunkler */
         }
+        .error {
+            color: red;
+            font-size: 16px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -48,12 +53,28 @@
         <h1>Hey Sophie und alle Abenteurer!</h1>
         <p>Könnt ihr den geheimen Code knacken?</p>
         <div class="input-container">
-            <!-- Action leitet zur Erfolgsseite weiter, die nach Codeeingabe erscheint -->
-            <form action="erfolgreich.html" method="get">
-                <input type="text" name="code" placeholder="Code eingeben" required>
-                <button type="submit">Überprüfen</button>
-            </form>
+            <input type="text" id="codeInput" placeholder="Code eingeben" required>
+            <button onclick="checkCode()">Überprüfen</button>
+            <p id="errorMessage" class="error"></p> <!-- Hier wird eine Fehlermeldung angezeigt -->
         </div>
     </div>
+
+    <script>
+        // Der geheime Code, den die Abenteurer knacken müssen
+        const correctCode = "12345678";  // Ändere dies zu deinem gewünschten Code
+
+        function checkCode() {
+            const userCode = document.getElementById("codeInput").value;  // Den eingegebenen Code abrufen
+            const errorMessage = document.getElementById("errorMessage");
+
+            // Wenn der eingegebene Code korrekt ist, zur Erfolgsseite weiterleiten
+            if (userCode === correctCode) {
+                window.location.href = "erfolgreich.html";  // Weiterleitung zur Erfolgsseite
+            } else {
+                errorMessage.textContent = "Der Code ist leider falsch. Versuche es noch einmal."; // Fehlernachricht anzeigen
+            }
+        }
+    </script>
 </body>
 </html>
+
