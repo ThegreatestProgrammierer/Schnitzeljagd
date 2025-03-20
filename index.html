@@ -16,6 +16,10 @@
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 20px;
+            margin: 0;
+        }
+        h2 {
+            font-size: 24px;
         }
         .code-container {
             display: flex;
@@ -29,7 +33,7 @@
             text-align: center;
             background: white;
             color: black;
-            border: none;
+            border: 2px solid #ccc;
             border-radius: 8px;
         }
         button {
@@ -42,4 +46,82 @@
             border-radius: 8px;
             cursor: pointer;
         }
-        butt
+        button:hover {
+            background-color: #001F40; /* Dunkleres Blau */
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 22px;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h2>Hey Sophie und alle Abenteurer!<br> Könnt ihr den geheimen Code knacken?</h2>
+    <div class="code-container">
+        <input type="text" maxlength="1" id="input1">
+        <input type="text" maxlength="1" id="input2">
+        <input type="text" maxlength="1" id="input3">
+        <input type="text" maxlength="1" id="input4">
+        <input type="text" maxlength="1" id="input5">
+        <input type="text" maxlength="1" id="input6">
+        <input type="text" maxlength="1" id="input7">
+        <input type="text" maxlength="1" id="input8">
+    </div>
+    <button onclick="checkCode()">✔ Überprüfen</button>
+    <p id="message"></p>
+
+    <script>
+        const correctCode = "12345678"; // Der richtige achtstellige Code
+
+        function checkCode() {
+            const inputs = document.querySelectorAll("input");
+            let enteredCode = "";
+            inputs.forEach(input => enteredCode += input.value);
+            
+            if (enteredCode === correctCode) {
+                document.getElementById("message").textContent = "🎉 Super gemacht! 🎉";
+                document.getElementById("message").style.color = "green";
+                startConfetti();
+            } else {
+                document.getElementById("message").textContent = "❌ Falsch! Versuche es erneut.";
+                document.getElementById("message").style.color = "red";
+            }
+        }
+
+        // Automatischer Fokus-Wechsel beim Eingeben
+        document.querySelectorAll("input").forEach((input, index, array) => {
+            input.addEventListener("input", () => {
+                if (input.value.length === 1 && index < array.length - 1) {
+                    array[index + 1].focus();
+                }
+            });
+        });
+
+        // Konfetti-Funktion
+        function startConfetti() {
+            for (let i = 0; i < 50; i++) {
+                let confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                document.body.appendChild(confetti);
+                confetti.style.left = Math.random() * window.innerWidth + "px";
+                confetti.style.backgroundColor = ["#ff0000", "#ff8000", "#ffff00", "#00ff00", "#0000ff", "#8000ff"][Math.floor(Math.random() * 6)];
+                confetti.style.animationDuration = (Math.random() * 2 + 3) + "s";
+
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
