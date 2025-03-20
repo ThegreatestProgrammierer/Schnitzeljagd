@@ -31,7 +31,7 @@
             const inputCode = document.getElementById("codeInput").value;
             
             if (inputCode === correctCode) {
-                document.body.innerHTML = '<h2>Super! Ihr habt den Code geknackt.</h2><div class="animation">🎉 Korrekt! Willkommen! 🎉</div>';
+                document.body.innerHTML = '<h2>Super! Ihr habt den Code geknackt.</h2><div class="animation">🎉 Super! Ihr habt den Code geknackt! 🎉</div>';
                 setTimeout(() => {
                     document.querySelector(".animation").style.opacity = "1";
                 }, 100);
@@ -40,7 +40,7 @@
                     window.location.href = "Letzteseite.html";
                 }, 10000); // Weiterleitung nach 10 Sekunden
             } else {
-                alert("Falscher Code. Bitte versuchen Sie es erneut.");
+                alert("Falscher Code. Bitte versucht es erneut.");
             }
         }
     </script>
