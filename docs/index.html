@@ -41,18 +41,6 @@
         button:hover {
             background-color: #004d40; /* Etwas dunkler */
         }
-        .success {
-            display: none;
-            color: green;
-            font-size: 24px;
-            margin-top: 20px;
-        }
-        .error {
-            display: none;
-            color: red;
-            font-size: 18px;
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
@@ -60,17 +48,11 @@
         <h1>Hey Sophie und alle Abenteurer!</h1>
         <p>Könnt ihr den geheimen Code knacken?</p>
         <div class="input-container">
-            <form action="erfolgreich.html">
+            <!-- Action leitet zur Erfolgsseite weiter, die nach Codeeingabe erscheint -->
+            <form action="erfolgreich.html" method="get">
                 <input type="text" name="code" placeholder="Code eingeben" required>
                 <button type="submit">Überprüfen</button>
             </form>
-        </div>
-
-        <div class="success">
-            <p>Super gemacht! Du hast den Code geknackt!</p>
-        </div>
-        <div class="error">
-            <p>Leider falsch. Versuche es nochmal!</p>
         </div>
     </div>
 </body>
