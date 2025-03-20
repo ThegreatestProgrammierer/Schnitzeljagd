@@ -48,7 +48,6 @@
             position: relative;
             cursor: pointer;
             margin-top: 20px;
-            perspective: 600px; /* Perspektive für 3D-Drehung */
         }
         .umschlag {
             width: 120px;
@@ -56,8 +55,8 @@
             background-color: white;
             border: 2px solid black;
             position: relative;
-            transform-style: preserve-3d; /* Ermöglicht 3D-Drehung */
-            transition: transform 1s; /* Weiche Übergänge für die Drehung */
+            transform-style: preserve-3d;
+            transition: transform 2s;
         }
         .umschlag::before {
             content: "";
@@ -68,64 +67,4 @@
             border-width: 40px 60px 40px 60px;
             border-color: transparent transparent white transparent;
             top: -40px;
-            left: 0;
-        }
-        /* Drehung des Umschlags, um die Rückseite sichtbar zu machen */
-        .umschlag.drehung {
-            transform: rotateY(180deg);
-        }
-        #brief {
-            display: none;
-            background-color: white;
-            padding: 20px;
-            border: 2px solid black;
-            max-width: 80%;
-            font-size: 18px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <h1>Hey Sophie und alle Abenteurer!</h1>
-    <p>Könnt ihr den geheimen Code knacken?</p>
-    <div id="eingabeContainer">
-        <input type="text" maxlength="1">
-        <input type="text" maxlength="1">
-        <input type="text" maxlength="1">
-        <input type="text" maxlength="1">
-        <input type="text" maxlength="1">
-        <input type="text" maxlength="1">
-        <input type="text" maxlength="1">
-        <input type="text" maxlength="1">
-    </div>
-    <button onclick="ueberpruefeCode()">Überprüfen</button>
-    <p id="nachricht"></p>
-    <div class="umschlag-container" onclick="oeffneBrief()">
-        <div class="umschlag"></div>
-    </div>
-    <div id="brief">Dies ist euer nächster Hinweis:<br>Lauft so lange gerade aus, bis es nach links geht und macht euch dann an den kurzen Abstieg. Den nächsten Hinweis findet ihr unter dem Lieblingsmaterial von Bibern…</div>
-    <script>
-        function ueberpruefeCode() {
-            const richtigerCode = "85395413";
-            let eingabe = "";
-            document.querySelectorAll("#eingabeContainer input").forEach(input => {
-                eingabe += input.value;
-            });
-            
-            if (eingabe === richtigerCode) {
-                document.getElementById("nachricht").textContent = "Super gemacht! Ihr habt den geheimen Code geknackt!";
-                document.querySelector(".umschlag-container").style.display = "flex";
-            } else {
-                document.getElementById("nachricht").textContent = "Falscher Code, versucht es nochmal!";
-            }
-        }
-        
-        function oeffneBrief() {
-            document.querySelector(".umschlag").classList.add("drehung"); // Drehung hinzufügen
-            setTimeout(() => {
-                document.getElementById("brief").style.display = "block"; // Brief nach der Drehung anzeigen
-            }, 1000); // Warte 1 Sekunde, bis die Drehung abgeschlossen ist
-        }
-    </script>
-</body>
-</html>
+  
