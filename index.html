@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geheimer Code</title>
+    <style>
+        body {
+            background-color: #E6CCFF; /* Pastelllila */
+            color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .code-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        input {
+            width: 50px;
+            height: 60px;
+            font-size: 28px;
+            text-align: center;
+            background: white;
+            color: black;
+            border: none;
+            border-radius: 8px;
+        }
+        button {
+            margin-top: 30px;
+            padding: 15px 25px;
+            font-size: 20px;
+            background-color: #002B5B; /* Marineblau */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #001F40; /* Dunkleres Blau */
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 22px;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            opacity: 0.7;
+            position: absolute;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h2>Hey Sophie und alle Abenteurer!<br> Könnt ihr den geheimen Code knacken?</h2>
+    <div class="code-container">
+        <input type="text" maxlength="1">
+        <input type="text" maxlength="1">
+        <input type="text" maxlength="1">
+        <input type="text" maxlength="1">
+        <input type="text" maxlength="1">
+        <input type="text" maxlength="1">
+        <input type="text" maxlength="1">
+    </div>
+    <button onclick="checkCode()">✔ Überprüfen</button>
+    <p id="message"></p>
+
+    <script>
+        const correctCode = "1234567"; // Hier den richtigen Code setzen
+
+        function checkCode() {
+            const inputs = document.querySelectorAll("input");
+            let enteredCode = "";
+            inputs.forEach(input => enteredCode += input.value);
+            
+            if (enteredCode === correctCode) {
+                document.getElementById("message").textContent = "🎉 Super gemacht! 🎉";
+                document.getElementById("message").style.color = "green";
+                startConfetti();
+            } else {
+                document.getElementById("message").textContent = "❌ Falsch! Versuche es erneut.";
+                document.getElementById("message").style.color = "red";
+            }
+        }
+
+        // Automatischer Fokus-Wechsel beim Eingeben
+        document.querySelectorAll("input").forEach((input, index, array) => {
+            input.addEventListener("input", () => {
+                if (input.value.length === 1 && index < array.length - 1) {
+                    array[index + 1].focus();
+                }
+            });
+        });
+
+        // Konfetti-Funktion
+        function startConfetti() {
+            for (let i = 0; i < 50; i++) {
+                let confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                document.body.appendChild(confetti);
+                confetti.style.left = Math.random() * window.innerWidth + "px";
+                confetti.style.backgroundColor = ["#ff0000", "#ff8000", "#ffff00", "#00ff00", "#0000ff", "#8000ff"][Math.floor(Math.random() * 6)];
+                confetti.style.animationDuration = (Math.random() * 2 + 3) + "s";
+
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
