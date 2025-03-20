@@ -47,6 +47,7 @@
             justify-content: center;
             position: relative;
             cursor: pointer;
+            margin-top: 20px;
         }
         .umschlag {
             width: 120px;
@@ -55,24 +56,16 @@
             border: 2px solid black;
             position: relative;
         }
-        .umschlag::before, .umschlag::after {
+        .umschlag::before {
             content: "";
             position: absolute;
             width: 0;
             height: 0;
             border-style: solid;
-        }
-        .umschlag::before {
-            border-width: 40px 60px 0 60px;
-            border-color: black transparent transparent transparent;
-            top: -2px;
+            border-width: 40px 60px 40px 60px;
+            border-color: transparent transparent white transparent;
+            top: -40px;
             left: 0;
-        }
-        .umschlag::after {
-            border-width: 40px 60px 0 60px;
-            border-color: white transparent transparent transparent;
-            top: -1px;
-            left: 1px;
         }
         #brief {
             display: none;
