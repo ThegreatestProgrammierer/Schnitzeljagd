@@ -15,65 +15,78 @@
             height: 100vh;
             margin: 0;
             text-align: center;
+            overflow: hidden;
         }
         h1 {
             color: #4A148C;  /* Dunkles Lila */
         }
         p {
-            font-size: 18px;
+            font-size: 20px;
             color: #333;
         }
+        .hidden {
+            display: none;
+        }
+        /* Konfetti */
         .confetti {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
+            width: 10px;
+            height: 10px;
+            background-color: #ff4081;
+            opacity: 0.8;
+            border-radius: 50%;
+            animation: fall linear infinite;
         }
-        .envelope {
-            width: 100px;
-            height: 70px;
-            background: white;
-            border: 2px solid #333;
-            position: relative;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: transform 0.5s;
-        }
-        .envelope:hover {
-            transform: scale(1.1);
-        }
-        .flap {
-            position: absolute;
-            top: -35px;
-            left: 0;
-            width: 100%;
-            height: 35px;
-            background: white;
-            border-top: 2px solid #333;
-            clip-path: polygon(0 100%, 50% 0, 100% 100%);
-            transition: transform 0.5s;
-        }
-        .letter {
-            display: none;
-            position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            padding: 10px;
-            background: white;
-            border: 2px solid #333;
-            text-align: center;
+        @keyframes fall {
+            from {
+                transform: translateY(-100vh);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>Super gemacht!</h1>
-    <p>Ihr habt den geheimen Code geknackt! 🎉</p>
+    <h1 id="successMessage" class="hidden">Super! Ihr habt den Code geknackt! 🎉</h1>
 
+    <script>
+        function startConfetti() {
+            for (let i = 0; i < 100; i++) {
+                let confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                document.body.appendChild(confetti);
 
+                let colors = ["#ff4081", "#FFEB3B", "#3F51B5", "#4CAF50", "#FF5722"];
+                let size = Math.random() * 10 + 5;
+                let position = Math.random() * 100;
+
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.left = `${position}vw`;
+                confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+
+        function showSuccessMessage() {
+            document.getElementById("successMessage").classList.remove("hidden");
+            startConfetti();
+            setTimeout(() => {
+                window.location.href = "Brief.html";
+            }, 10000);
+        }
+
+        // Sobald die Seite geladen wird, startet die Animation
+        window.onload = showSuccessMessage;
+    </script>
 
 </body>
 </html>
