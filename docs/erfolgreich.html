@@ -73,24 +73,7 @@
     <h1>Super gemacht!</h1>
     <p>Ihr habt den geheimen Code geknackt! 🎉</p>
 
-    <!-- Animierter Briefumschlag -->
-    <div class="envelope" onclick="openEnvelope()">
-        <div class="flap"></div>
-    </div>
 
-    <!-- Der versteckte Brief mit dem nächsten Hinweis -->
-    <div class="letter" id="letter">
-        <p><strong>Dies ist euer nächster Hinweis:</strong></p>
-        <p>Lauft so lange geradeaus, bis es nach links geht und macht euch dann an den kurzen Abstieg.</p>
-        <p>Den nächsten Hinweis findet ihr unter dem Lieblingsmaterial von Bibern…</p>
-    </div>
-
-    <script>
-        function openEnvelope() {
-            document.querySelector('.flap').style.transform = "rotateX(180deg)";
-            document.getElementById("letter").style.display = "block";
-        }
-    </script>
 
 </body>
 </html>
