@@ -48,6 +48,7 @@
             position: relative;
             cursor: pointer;
             margin-top: 20px;
+            perspective: 600px; /* Perspektive für 3D-Drehung */
         }
         .umschlag {
             width: 120px;
@@ -55,6 +56,8 @@
             background-color: white;
             border: 2px solid black;
             position: relative;
+            transform-style: preserve-3d; /* Ermöglicht 3D-Drehung */
+            transition: transform 1s; /* Weiche Übergänge für die Drehung */
         }
         .umschlag::before {
             content: "";
@@ -66,6 +69,10 @@
             border-color: transparent transparent white transparent;
             top: -40px;
             left: 0;
+        }
+        /* Drehung des Umschlags, um die Rückseite sichtbar zu machen */
+        .umschlag.drehung {
+            transform: rotateY(180deg);
         }
         #brief {
             display: none;
@@ -114,7 +121,10 @@
         }
         
         function oeffneBrief() {
-            document.body.innerHTML = "<div id='brief'>Dies ist euer nächster Hinweis:<br>Lauft so lange gerade aus, bis es nach links geht und macht euch dann an den kurzen Abstieg. Den nächsten Hinweis findet ihr unter dem Lieblingsmaterial von Bibern…</div>";
+            document.querySelector(".umschlag").classList.add("drehung"); // Drehung hinzufügen
+            setTimeout(() => {
+                document.getElementById("brief").style.display = "block"; // Brief nach der Drehung anzeigen
+            }, 1000); // Warte 1 Sekunde, bis die Drehung abgeschlossen ist
         }
     </script>
 </body>
