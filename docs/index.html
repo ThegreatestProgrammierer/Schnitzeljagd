@@ -3,125 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geheimer Code</title>
+    <title>Code Abenteurer</title>
     <style>
         body {
-            background-color: #E6CCFF; /* Pastelllila */
-            color: black;
+            background-color: #f3e5f5; /* Pastelllila Hintergrund */
+            font-family: 'Arial', sans-serif;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
             margin: 0;
+            text-align: center;
         }
-        h2 {
-            font-size: 24px;
+        h1 {
+            color: #4a148c;
         }
-        .code-container {
-            display: flex;
-            gap: 10px;
+        .input-container {
             margin-top: 20px;
         }
-        input {
-            width: 50px;
-            height: 60px;
-            font-size: 28px;
-            text-align: center;
-            background: white;
-            color: black;
-            border: 2px solid #ccc;
-            border-radius: 8px;
+        input[type="text"] {
+            padding: 10px;
+            width: 200px;
+            font-size: 18px;
+            border: 2px solid #4a148c;
+            border-radius: 5px;
         }
         button {
-            margin-top: 30px;
-            padding: 15px 25px;
-            font-size: 20px;
-            background-color: #002B5B; /* Marineblau */
+            background-color: #006064; /* Marineblau */
             color: white;
             border: none;
-            border-radius: 8px;
+            padding: 10px 20px;
+            margin-top: 10px;
+            font-size: 16px;
+            border-radius: 5px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #001F40; /* Dunkleres Blau */
+            background-color: #004d40; /* Etwas dunkler */
         }
-        #message {
+        .success {
+            display: none;
+            color: green;
+            font-size: 24px;
             margin-top: 20px;
-            font-size: 22px;
         }
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: red;
-            opacity: 0.7;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            0% { transform: translateY(-10px) rotate(0deg); }
-            100% { transform: translateY(100vh) rotate(360deg); }
+        .error {
+            display: none;
+            color: red;
+            font-size: 18px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h2>Hey Sophie und alle Abenteurer!<br> Könnt ihr den geheimen Code knacken?</h2>
-    <div class="code-container">
-        <input type="text" maxlength="1" id="input1">
-        <input type="text" maxlength="1" id="input2">
-        <input type="text" maxlength="1" id="input3">
-        <input type="text" maxlength="1" id="input4">
-        <input type="text" maxlength="1" id="input5">
-        <input type="text" maxlength="1" id="input6">
-        <input type="text" maxlength="1" id="input7">
-        <input type="text" maxlength="1" id="input8">
+    <div>
+        <h1>Hey Sophie und alle Abenteurer!</h1>
+        <p>Könnt ihr den geheimen Code knacken?</p>
+        <div class="input-container">
+            <form action="erfolgreich.html">
+                <input type="text" name="code" placeholder="Code eingeben" required>
+                <button type="submit">Überprüfen</button>
+            </form>
+        </div>
+
+        <div class="success">
+            <p>Super gemacht! Du hast den Code geknackt!</p>
+        </div>
+        <div class="error">
+            <p>Leider falsch. Versuche es nochmal!</p>
+        </div>
     </div>
-    <button onclick="checkCode()">✔ Überprüfen</button>
-    <p id="message"></p>
-
-    <script>
-        const correctCode = "12345678"; // Der richtige achtstellige Code
-
-        function checkCode() {
-            const inputs = document.querySelectorAll("input");
-            let enteredCode = "";
-            inputs.forEach(input => enteredCode += input.value);
-            
-            if (enteredCode === correctCode) {
-                document.getElementById("message").textContent = "🎉 Super gemacht! 🎉";
-                document.getElementById("message").style.color = "green";
-                startConfetti();
-            } else {
-                document.getElementById("message").textContent = "❌ Falsch! Versuche es erneut.";
-                document.getElementById("message").style.color = "red";
-            }
-        }
-
-        // Automatischer Fokus-Wechsel beim Eingeben
-        document.querySelectorAll("input").forEach((input, index, array) => {
-            input.addEventListener("input", () => {
-                if (input.value.length === 1 && index < array.length - 1) {
-                    array[index + 1].focus();
-                }
-            });
-        });
-
-        // Konfetti-Funktion
-        function startConfetti() {
-            for (let i = 0; i < 50; i++) {
-                let confetti = document.createElement("div");
-                confetti.classList.add("confetti");
-                document.body.appendChild(confetti);
-                confetti.style.left = Math.random() * window.innerWidth + "px";
-                confetti.style.backgroundColor = ["#ff0000", "#ff8000", "#ffff00", "#00ff00", "#0000ff", "#8000ff"][Math.floor(Math.random() * 6)];
-                confetti.style.animationDuration = (Math.random() * 2 + 3) + "s";
-
-                setTimeout(() => confetti.remove(), 3000);
-            }
-        }
-    </script>
 </body>
 </html>
