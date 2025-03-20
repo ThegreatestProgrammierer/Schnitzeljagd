@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-
-    <script>
-        function checkCode() {
-            const correctCode = "85395413"; // Ersetze dies mit dem richtigen Code
-            const inputCode = document.getElementById("codeInput").value;
-            
-            if (inputCode === correctCode) {
-                document.body.innerHTML = '<h2>Super! Ihr habt den Code geknackt.</h2><div class="animation">🎉 Super! Ihr habt den Code geknackt! 🎉</div>';
-                setTimeout(() => {
-                    document.querySelector(".animation").style.opacity = "1";
-                }, 100);
-                  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super gemacht!</title>
+    <style>
         body {
             background-color: #f3e5f5; /* Pastelllila Hintergrund */
             font-family: 'Arial', sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -24,16 +17,80 @@
             text-align: center;
         }
         h1 {
-            color: #4a148c;
+            color: #4A148C;  /* Dunkles Lila */
         }
-                </style> 
-                setTimeout(() => {
-                    window.location.href = "Letzteseite.html";
-                }, 10000); // Weiterleitung nach 10 Sekunden
-            } else {
-                alert("Falscher Code. Bitte versucht es erneut.");
-            }
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+        .confetti {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .envelope {
+            width: 100px;
+            height: 70px;
+            background: white;
+            border: 2px solid #333;
+            position: relative;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+        .envelope:hover {
+            transform: scale(1.1);
+        }
+        .flap {
+            position: absolute;
+            top: -35px;
+            left: 0;
+            width: 100%;
+            height: 35px;
+            background: white;
+            border-top: 2px solid #333;
+            clip-path: polygon(0 100%, 50% 0, 100% 100%);
+            transition: transform 0.5s;
+        }
+        .letter {
+            display: none;
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            padding: 10px;
+            background: white;
+            border: 2px solid #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Super gemacht!</h1>
+    <p>Ihr habt den geheimen Code geknackt! 🎉</p>
+
+    <!-- Animierter Briefumschlag -->
+    <div class="envelope" onclick="openEnvelope()">
+        <div class="flap"></div>
+    </div>
+
+    <!-- Der versteckte Brief mit dem nächsten Hinweis -->
+    <div class="letter" id="letter">
+        <p><strong>Dies ist euer nächster Hinweis:</strong></p>
+        <p>Lauft so lange geradeaus, bis es nach links geht und macht euch dann an den kurzen Abstieg.</p>
+        <p>Den nächsten Hinweis findet ihr unter dem Lieblingsmaterial von Bibern…</p>
+    </div>
+
+    <script>
+        function openEnvelope() {
+            document.querySelector('.flap').style.transform = "rotateX(180deg)";
+            document.getElementById("letter").style.display = "block";
         }
     </script>
+
 </body>
 </html>
